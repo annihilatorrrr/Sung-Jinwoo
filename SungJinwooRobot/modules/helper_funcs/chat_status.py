@@ -31,7 +31,7 @@ def is_sudo_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
 
 def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if (chat.type == 'private' or user_id in DRAGONS or user_id in DEV_USERS or
-            chat.all_members_are_administrators
+            chat.all_members_are_administrators):
         return True
 
     if not member:
@@ -73,7 +73,7 @@ def is_user_ban_protected(chat: Chat,
                           member: ChatMember = None) -> bool:
     if (chat.type == 'private' or user_id in DRAGONS or user_id in DEV_USERS or
             user_id in WOLVES or user_id in TIGERS or
-            chat.all_members_are_administrators
+            chat.all_members_are_administrators):
         return True
 
     if not member:
@@ -351,7 +351,7 @@ def user_can_ban(func):
         user = update.effective_user.id
         member = update.effective_chat.get_member(user)
         if not (member.can_restrict_members or member.status == "creator"
-               ) and not user in DRAGONS
+               ) and not user in DRAGONS:
             update.effective_message.reply_text(
                 "Sorry son, but you're not worthy to wield the banhammer.")
             return ""
